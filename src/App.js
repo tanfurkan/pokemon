@@ -1,31 +1,31 @@
-import {Container, CssBaseline, Link, Typography} from "@material-ui/core";
+import {CssBaseline} from "@material-ui/core";
+import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 
-
-function Copyright() {
+const App = () => {
     return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
+        <div className="App">
+            <CssBaseline />
+            <Router>
+                <Switch>
+                    <Route exact path="/">
+                        HomePage
+                    </Route>
+                    <Route path="/pokemon/:pokemonName" >
+                        <div>
+                            Pokemon Details
+                        </div>
+                    </Route>
+                    <Route >
+                        <div>
+                            404
+                            <Link to='/'>Go Home</Link>
+                        </div>
+                    </Route>
+                </Switch>
+            </Router>
+        </div>
     );
 }
 
-const App = () => {
-  return (
-    <div className="App">
-      <CssBaseline />
-        <Container maxWidth="sm">
-          <Typography variant="h4" component="h1" gutterBottom>
-            Create React App v4-beta example
-          </Typography>
-          <Copyright />
-        </Container>
-    </div>
-  );
-}
-
 export default App;
+
