@@ -1,3 +1,5 @@
-export const PokemonDetails = () =>{
-    return(<div>PokemonDetails</div>)
-}
+import React from 'react';
+
+export const PokemonDetails = () => {
+	return <div>PokemonDetails</div>;
+};

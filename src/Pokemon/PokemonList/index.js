@@ -1,3 +1,3 @@
-export const PokemonList = () =>{
-    return(<div>PokemonList</div>)
-}
+import React from 'react';
+
+export const PokemonList = () => <div>PokemonList</div>;
