@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+.idea
+
+# Only apps should have lockfiles
+yarn.lock
+package-lock.json
