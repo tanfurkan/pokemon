@@ -1,5 +1,6 @@
 import {CssBaseline} from "@material-ui/core";
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import {PokemonDetails, PokemonList} from "./Pokemon";
 
 const App = () => {
     return (
@@ -8,17 +9,17 @@ const App = () => {
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        HomePage
+                        <PokemonList />
                     </Route>
                     <Route path="/pokemon/:pokemonName" >
                         <div>
-                            Pokemon Details
+                          <PokemonDetails />
                         </div>
                     </Route>
                     <Route >
                         <div>
                             404
-                            <Link to='/'>Go Home</Link>
+                            <Link to="/">Go Home</Link>
                         </div>
                     </Route>
                 </Switch>
