@@ -9,7 +9,7 @@ const App = () => (
 		<CssBaseline />
 		<Router>
 			<PokemonHeader />
-			<Container maxWidth='md'>
+			<Container maxWidth='lg'>
 				<Switch>
 					<Route exact path='/'>
 						<PokemonList />
