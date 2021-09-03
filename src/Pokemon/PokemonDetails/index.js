@@ -136,8 +136,8 @@ export const PokemonDetails = () => {
 									justifyContent='flex-start'
 									className={classes.typeContainer}
 								>
-									{data?.abilities?.map((abilityObject) => (
-										<TypeInfo type={abilityObject.ability.name} />
+									{data?.abilities?.map((abilityObject, key) => (
+										<TypeInfo type={abilityObject.ability.name} key={key} />
 									))}
 								</Grid>
 								<Grid item xs={12} className={classes.detailTitle}>
@@ -150,8 +150,8 @@ export const PokemonDetails = () => {
 									justifyContent='flex-start'
 									className={classes.typeContainer}
 								>
-									{data?.types?.map((typeObject) => (
-										<TypeInfo type={typeObject.type.name} />
+									{data?.types?.map((typeObject, key) => (
+										<TypeInfo type={typeObject.type.name} key={key} />
 									))}
 								</Grid>
 								<Grid item xs={12} className={classes.detailTitle}>
@@ -167,10 +167,10 @@ export const PokemonDetails = () => {
 									<TypeInfo type={`Weight ${data.weight}`} />
 									<TypeInfo type={`Height ${data.height}`} />
 									<TypeInfo type={`Experience ${data.base_experience}`} />
-									{data?.stats?.map((statObject) => {
+									{data?.stats?.map((statObject, key) => {
 										let stat =
 											statObject?.stat?.name + ' : ' + statObject?.base_stat;
-										return <TypeInfo type={stat} />;
+										return <TypeInfo type={stat} key={key} />;
 									})}
 								</Grid>
 							</Grid>
