@@ -1,24 +1,30 @@
 import React from 'react';
 import { FixedSizeList } from 'react-window';
-import { CircularProgress, makeStyles } from '@material-ui/core';
+import { CircularProgress, makeStyles, TextField } from '@material-ui/core';
 import useFetch from '../../hooks/useFetch';
 import Alert from '@material-ui/lab/Alert';
 import PokemonListRow from './PokemonListRow';
-// import PokemonListRow from './PokemonListRow';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignContent: 'center',
 		width: '100%',
-		height: 400,
-		maxWidth: 300,
+		height: '100%',
 		backgroundColor: theme.palette.background.paper,
+		marginTop: theme.spacing(6),
+		padding: theme.spacing(4, 4),
+		borderRadius: 8,
 	},
 }));
 
 export const PokemonList = () => {
 	const classes = useStyles();
 	const { data, isLoading, error } = useFetch('https://pokeapi.co/api/v2/pokemon?limit=1500');
-	console.log(data, isLoading, error);
+
+	const pokemonList = data?.results;
 
 	if (error) {
 		return (
@@ -30,12 +36,21 @@ export const PokemonList = () => {
 
 	return (
 		<div className={classes.root}>
+			<TextField id='searchPokemon' label='Search Pokemon' variant='outlined' />
 			{isLoading ? (
 				<CircularProgress />
 			) : (
-				<FixedSizeList height={400} width={300} itemSize={46} itemCount={200}>
-					{({ index, style }) => <PokemonListRow index={index} style={style} pokemon={data[index]} />}
-				</FixedSizeList>
+				<div>
+					<FixedSizeList height={800} itemSize={40} itemCount={data?.count}>
+						{({ index, style }) => (
+							<PokemonListRow
+								index={index}
+								style={style}
+								pokemon={pokemonList[index]}
+							/>
+						)}
+					</FixedSizeList>
+				</div>
 			)}
 		</div>
 	);
