@@ -29,9 +29,6 @@ const useStyles = makeStyles((theme) => ({
 		overflow: 'auto',
 		maxHeight: '70vh',
 	},
-	viewModeChange: {
-		justifySelf: 'flex-end',
-	},
 	list: {
 		flexGrow: 1,
 		width: '100%',
