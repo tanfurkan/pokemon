@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { AppBar, CardMedia, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -10,32 +11,26 @@ const useStyles = makeStyles((theme) => ({
 		marginRight: theme.spacing(2),
 	},
 	pokemonImage: {
-		height: 42,
-		width: 42,
+		height: 38,
+		width: 38,
 	},
 }));
 
 const PokemonHeader = () => {
 	const classes = useStyles();
+	const history = useHistory();
 
 	return (
 		<AppBar position='static' className={classes.root}>
 			<Toolbar variant='dense'>
-				<IconButton
-					edge='start'
-					className={classes.iconButton}
-					color='inherit'
-					aria-label='menu'
-				>
-					<div>
-						<CardMedia
-							component={'img'}
-							className={classes.pokemonImage}
-							image='/pokeball.png'
-							title='Pokemon Ball'
-							alt='Pokemon Ball'
-						/>
-					</div>
+				<IconButton className={classes.iconButton} onClick={() => history.push('/')}>
+					<CardMedia
+						component={'img'}
+						className={classes.pokemonImage}
+						image='/pokeball.png'
+						title='Pokemon Ball'
+						alt='Pokemon Ball'
+					/>
 				</IconButton>
 				<Typography variant='h6' color='inherit'>
 					Pokemon App

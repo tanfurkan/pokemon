@@ -1,8 +1,9 @@
 import React from 'react';
 import { Container, CssBaseline } from '@material-ui/core';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+
+import PokemonHeader from './Header';
 import { PokemonDetails, PokemonList } from './Pokemon';
-import PokemonHeader from './header';
 
 const App = () => (
 	<div className='App'>
