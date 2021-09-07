@@ -2,8 +2,9 @@ import React from 'react';
 import { Container, CssBaseline } from '@material-ui/core';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
-import PokemonHeader from './Header';
+import { PokemonHeader } from './common/Header';
 import { PokemonDetails, PokemonList } from './Pokemon';
+import { LoginPage } from './Auth';
 
 const App = () => (
 	<div className='App'>
@@ -12,6 +13,9 @@ const App = () => (
 			<PokemonHeader />
 			<Container maxWidth='lg'>
 				<Switch>
+					<Route exact path='/login'>
+						<LoginPage />
+					</Route>
 					<Route exact path='/'>
 						<PokemonList />
 					</Route>

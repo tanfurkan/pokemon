@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const PokemonHeader = () => {
+export const PokemonHeader = () => {
 	const classes = useStyles();
 	const history = useHistory();
 
@@ -39,5 +39,3 @@ const PokemonHeader = () => {
 		</AppBar>
 	);
 };
-
-export default PokemonHeader;

@@ -3,7 +3,7 @@ import { Avatar, ListItem, ListItemAvatar, ListItemText } from '@material-ui/cor
 
 import capitalizeFirstLetter from '../../Utils/capitalizeFirstLetter';
 
-const PokemonListRow = ({ pokemon = null, style }) => {
+const PokemonListRow = ({ pokemon = null }) => {
 	if (!pokemon) {
 		return null;
 	}
