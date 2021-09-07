@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+
 import { AppBar, CardMedia, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({

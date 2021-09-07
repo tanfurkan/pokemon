@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Avatar, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
 
 import capitalizeFirstLetter from '../../Utils/capitalizeFirstLetter';

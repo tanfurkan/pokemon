@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import { CircularProgress, Grid, IconButton, List, makeStyles, TextField } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import AppsIcon from '@material-ui/icons/Apps';
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.background.paper,
 		marginTop: theme.spacing(6),
 		padding: theme.spacing(4, 4),
-		borderRadius: 8,
+		borderRadius: theme.spacing(1),
 	},
 	errorBar: {
 		width: '60%',

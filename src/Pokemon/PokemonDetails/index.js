@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.background.paper,
 		marginTop: theme.spacing(6),
 		padding: theme.spacing(4, 4),
-		borderRadius: 8,
+		borderRadius: theme.spacing(1),
 	},
 	errorBar: {
 		width: '60%',
@@ -31,50 +31,52 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(1),
 	},
 	typeInfo: {
-		width: 120,
+		width: 200,
+		maxWidth: 240,
+		padding: theme.spacing(1),
+		borderRadius: theme.spacing(1),
+		textAlign: 'center',
+		fontSize: 15,
+		fontWeight: 500,
+		color: grey[50],
+		marginRight: theme.spacing(0.5),
+		marginBottom: theme.spacing(0.5),
 	},
 	detailTitle: {
 		marginTop: theme.spacing(1),
 	},
 }));
 
-const TypeInfo = ({ type }) => {
-	let style = {
-		width: 200,
-		maxWidth: 240,
-		padding: 8,
-		borderRadius: 8,
-		textAlign: 'center',
-		fontSize: 15,
-		fontWeight: 500,
-		color: grey[50],
-		marginRight: 4,
-		marginBottom: 4,
-	};
+const TypeInfo = ({ classes, type }) => {
+	let colorStyle = {};
 
 	switch (type) {
 		case 'fire':
-			style = { ...style, background: 'red' };
+			colorStyle = { background: 'red' };
 			break;
 		case 'flying':
-			style = { ...style, background: 'aqua' };
+			colorStyle = { background: 'aqua' };
 			break;
 		case 'grass':
-			style = { ...style, background: 'green' };
+			colorStyle = { background: 'green' };
 			break;
 		case 'poison':
-			style = { ...style, background: 'purple' };
+			colorStyle = { background: 'purple' };
 			break;
 		default: {
 			let randomRColor = Math.floor(Math.random() * 255);
 			let randomGColor = Math.floor(Math.random() * 255);
 			let randomBColor = Math.floor(Math.random() * 255);
-			style = { ...style, background: `rgb(${randomRColor},${randomGColor},${randomBColor}` };
+			colorStyle = { background: `rgb(${randomRColor},${randomGColor},${randomBColor}` };
 			break;
 		}
 	}
 
-	return <div style={style}>{capitalizeFirstLetter(type)}</div>;
+	return (
+		<div className={classes.typeInfo} style={colorStyle}>
+			{capitalizeFirstLetter(type)}
+		</div>
+	);
 };
 
 export const PokemonDetails = () => {
@@ -137,7 +139,11 @@ export const PokemonDetails = () => {
 									className={classes.typeContainer}
 								>
 									{data?.abilities?.map((abilityObject, key) => (
-										<TypeInfo type={abilityObject.ability.name} key={key} />
+										<TypeInfo
+											classes={classes}
+											type={abilityObject.ability.name}
+											key={key}
+										/>
 									))}
 								</Grid>
 								<Grid item xs={12} className={classes.detailTitle}>
@@ -151,7 +157,11 @@ export const PokemonDetails = () => {
 									className={classes.typeContainer}
 								>
 									{data?.types?.map((typeObject, key) => (
-										<TypeInfo type={typeObject.type.name} key={key} />
+										<TypeInfo
+											classes={classes}
+											type={typeObject.type.name}
+											key={key}
+										/>
 									))}
 								</Grid>
 								<Grid item xs={12} className={classes.detailTitle}>
@@ -164,13 +174,16 @@ export const PokemonDetails = () => {
 									justifyContent='flex-start'
 									className={classes.typeContainer}
 								>
-									<TypeInfo type={`Weight ${data.weight}`} />
-									<TypeInfo type={`Height ${data.height}`} />
-									<TypeInfo type={`Experience ${data.base_experience}`} />
+									<TypeInfo classes={classes} type={`Weight ${data.weight}`} />
+									<TypeInfo classes={classes} type={`Height ${data.height}`} />
+									<TypeInfo
+										classes={classes}
+										type={`Experience ${data.base_experience}`}
+									/>
 									{data?.stats?.map((statObject, key) => {
 										let stat =
 											statObject?.stat?.name + ' : ' + statObject?.base_stat;
-										return <TypeInfo type={stat} key={key} />;
+										return <TypeInfo classes={classes} type={stat} key={key} />;
 									})}
 								</Grid>
 							</Grid>
