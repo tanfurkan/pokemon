@@ -1,39 +1,31 @@
 import React from 'react';
-import { Container, CssBaseline } from '@material-ui/core';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
-import { PokemonHeader } from './common/Header';
-import { PokemonDetails, PokemonList } from './Pokemon';
+import { CssBaseline } from '@material-ui/core';
+
 import { LoginPage } from './Auth';
 import AuthProvider from './Auth/AuthContext';
+import { PokemonDetails, PokemonList } from './Pokemon';
+import ProtectedRoute from './common/ProtectedRoute';
 
 const App = () => (
 	<AuthProvider>
 		<div className='App'>
 			<CssBaseline />
 			<Router>
-				<PokemonHeader />
-				<Container maxWidth='lg'>
-					<Switch>
-						<Route exact path='/login'>
-							<LoginPage />
-						</Route>
-						<Route exact path='/'>
-							<PokemonList />
-						</Route>
-						<Route path='/pokemon/:pokemonName'>
-							<div>
-								<PokemonDetails />
-							</div>
-						</Route>
-						<Route>
-							<div>
-								404
-								<Link to='/'>Go Home</Link>
-							</div>
-						</Route>
-					</Switch>
-				</Container>
+				<Switch>
+					<Route exact path='/login'>
+						<LoginPage />
+					</Route>
+					<ProtectedRoute exact path='/' component={PokemonList} />
+					<ProtectedRoute path='/pokemon/:pokemonName' component={PokemonDetails} />
+					<Route>
+						<div>
+							404
+							<Link to='/'>Go Home</Link>
+						</div>
+					</Route>
+				</Switch>
 			</Router>
 		</div>
 	</AuthProvider>
