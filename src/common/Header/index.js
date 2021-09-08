@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 
 import { AppBar, CardMedia, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
 
+import { HeaderUser } from '../HeaderUser';
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
@@ -14,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
 	pokemonImage: {
 		height: 38,
 		width: 38,
+	},
+	appName: {
+		flexGrow: 1,
 	},
 }));
 
@@ -33,9 +38,10 @@ export const PokemonHeader = () => {
 						alt='Pokemon Ball'
 					/>
 				</IconButton>
-				<Typography variant='h6' color='inherit'>
+				<Typography variant='h6' color='inherit' className={classes.appName}>
 					Pokemon App
 				</Typography>
+				<HeaderUser />
 			</Toolbar>
 		</AppBar>
 	);

@@ -8,7 +8,7 @@ mockAdapter.onPost('/login').reply((config) => {
 	const { email, password } = JSON.parse(config.data);
 
 	if (email === 'test@startuphero.es' && password === 'foobar123') {
-		return [200, { id: 1, name: 'John Smith' }];
+		return [200, { id: 1, name: 'John Smith', email }];
 	}
 
 	return [

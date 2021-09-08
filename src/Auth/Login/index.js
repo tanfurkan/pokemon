@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
@@ -18,6 +18,8 @@ import {
 
 import { pokemonGIF_URL, pokemonIMG_URL } from '../../Utils/constants';
 import authAxios from '../../services/auth';
+import { AuthContext } from '../AuthContext';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	loginContainer: {
@@ -66,6 +68,9 @@ const validationSchema = yup.object({
 
 export const LoginPage = () => {
 	const classes = useStyles();
+	const history = useHistory();
+
+	const { setAuthUser } = useContext(AuthContext);
 	const [loading, setLoading] = useState(false);
 
 	const formik = useFormik({
@@ -83,7 +88,9 @@ export const LoginPage = () => {
 				})
 				.then((response) => {
 					const user = response.data;
+					setAuthUser(user);
 					setLoading(false);
+					history.push('/');
 				})
 				.catch((error) => {
 					window.alert(error.response.data.message);
