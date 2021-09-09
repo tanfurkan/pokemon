@@ -8,7 +8,7 @@ import AuthProvider from './Auth/AuthContext';
 import { PokemonDetails, PokemonList } from './Pokemon';
 import ProtectedRoute from './common/ProtectedRoute';
 
-const App = () => (
+const App : React.FC<unknown> = () => (
 	<AuthProvider>
 		<div className='App'>
 			<CssBaseline />

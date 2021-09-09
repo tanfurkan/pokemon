@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const useFetch = (url) => {
-	const [isLoading, setIsLoading] = useState(true);
-	const [data, setData] = useState(null);
-	const [error, setError] = useState(null);
+import { IUseFetch } from '../types';
+
+function useFetch<T = unknown>(url: string): IUseFetch<T> {
+	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const [data, setData] = useState<T| undefined>(undefined);
+	const [error, setError] = useState<string>('');
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -22,6 +24,6 @@ const useFetch = (url) => {
 	}, [url]);
 
 	return { isLoading, data, error };
-};
+}
 
 export default useFetch;

@@ -1,4 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { AxiosError, AxiosResponse } from 'axios';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
@@ -16,13 +18,14 @@ import {
 	Typography,
 } from '@material-ui/core';
 
-import { pokemonGIF_URL, pokemonIMG_URL } from '../../Utils/constants';
-import authAxios from '../../services/auth';
 import { AuthContext } from '../AuthContext';
-import { useHistory } from 'react-router-dom';
+import authAxios from '../../services/auth';
+import { pokemonGIF_URL, pokemonIMG_URL } from '../../Utils/constants';
+
 
 const useStyles = makeStyles((theme) => ({
 	loginContainer: {
+		minHeight: 700,
 		height: 'calc(100vh - 62px)',
 		display: 'flex',
 		justifyContent: 'center',
@@ -57,21 +60,28 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema = yup.object({
 	email: yup
-		.string('Enter your email')
+		.string()
 		.email('Enter a valid email')
 		.required('Email is required'),
 	password: yup
-		.string('Enter your password')
+		.string()
 		.min(8, 'Password should be of minimum 8 characters length')
 		.required('Password is required'),
 });
 
-export const LoginPage = () => {
+export const LoginPage : React.FC<unknown> = () => {
 	const classes = useStyles();
 	const history = useHistory();
 
-	const { setAuthUser } = useContext(AuthContext);
-	const [loading, setLoading] = useState(false);
+	const { authenticatedUser, setAuthUser } = useContext(AuthContext);
+	const [loading, setLoading] = useState<boolean>(false);
+
+	useEffect(() => {
+		if(authenticatedUser){
+			history.push('/');
+		}
+	}, []);
+
 
 	const formik = useFormik({
 		initialValues: {
@@ -86,14 +96,14 @@ export const LoginPage = () => {
 					email: values.email,
 					password: values.password,
 				})
-				.then((response) => {
+				.then((response: AxiosResponse) => {
 					const user = response.data;
 					setAuthUser(user);
 					setLoading(false);
 					history.push('/');
 				})
-				.catch((error) => {
-					window.alert(error.response.data.message);
+				.catch((error : AxiosError) => {
+					window.alert(error?.response?.data?.message);
 					setLoading(false);
 				});
 		},
@@ -164,7 +174,7 @@ export const LoginPage = () => {
 						</Grid>
 						<Grid item>
 							<Link href='#' variant='body2'>
-								Don't have an account? Sign Up
+								{'Don\'t have an account? Sign Up'}
 							</Link>
 						</Grid>
 					</Grid>

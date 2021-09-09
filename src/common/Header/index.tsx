@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const PokemonHeader = () => {
+export const PokemonHeader : React.FC<unknown> = () => {
 	const classes = useStyles();
 	const history = useHistory();
 

@@ -1,16 +1,9 @@
 import React from 'react';
 
-import {
-	Card,
-	CardActionArea,
-	CardContent,
-	CardMedia,
-	Grid,
-	makeStyles,
-	Typography,
-} from '@material-ui/core';
+import { Card, CardActionArea, CardContent, CardMedia, Grid, makeStyles, Typography } from '@material-ui/core';
 
 import capitalizeFirstLetter from '../../Utils/capitalizeFirstLetter';
+import { IPokemon } from '../../types';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -25,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const PokemonListCard = ({ pokemon = null }) => {
+const PokemonListCard : React.FC<{pokemon : IPokemon}> = ({ pokemon = null }) => {
 	const classes = useStyles();
 
 	if (!pokemon) {
