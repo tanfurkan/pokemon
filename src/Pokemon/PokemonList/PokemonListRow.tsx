@@ -3,8 +3,9 @@ import React from 'react';
 import { Avatar, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
 
 import capitalizeFirstLetter from '../../Utils/capitalizeFirstLetter';
+import { IPokemon } from '../../types';
 
-const PokemonListRow = ({ pokemon = null }) => {
+const PokemonListRow : React.FC<{ pokemon: IPokemon }> = ({ pokemon = null })  =>  {
 	if (!pokemon) {
 		return null;
 	}

@@ -1,20 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import {
-	CardMedia,
-	CircularProgress,
-	Container,
-	Grid,
-	makeStyles,
-	Typography,
-} from '@material-ui/core';
+import { CardMedia, CircularProgress, Container, Grid, makeStyles, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { grey } from '@material-ui/core/colors';
 
 import useFetch from '../../hooks/useFetch';
 import capitalizeFirstLetter from '../../Utils/capitalizeFirstLetter';
 import { PokemonHeader } from '../../common/Header';
+import { IPokemonDetail, PokemonParamType } from '../../types';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -55,7 +49,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const TypeInfo = ({ classes, type }) => {
+const TypeInfo : React.FC<{ type: string}> = ( {type} ) => {
+	const classes = useStyles();
 	let colorStyle = {};
 
 	switch (type) {
@@ -72,9 +67,9 @@ const TypeInfo = ({ classes, type }) => {
 			colorStyle = { background: 'purple' };
 			break;
 		default: {
-			let randomRColor = Math.floor(Math.random() * 255);
-			let randomGColor = Math.floor(Math.random() * 255);
-			let randomBColor = Math.floor(Math.random() * 255);
+			const randomRColor = Math.floor(Math.random() * 255);
+			const randomGColor = Math.floor(Math.random() * 255);
+			const randomBColor = Math.floor(Math.random() * 255);
 			colorStyle = { background: `rgb(${randomRColor},${randomGColor},${randomBColor}` };
 			break;
 		}
@@ -87,10 +82,12 @@ const TypeInfo = ({ classes, type }) => {
 	);
 };
 
-export const PokemonDetails = () => {
+
+
+export const PokemonDetails: React.FC<unknown> = () => {
 	const classes = useStyles();
-	let { pokemonName } = useParams();
-	const { data, isLoading, error } = useFetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+	const { pokemonName } = useParams<PokemonParamType>();
+	const { data , isLoading, error } = useFetch<IPokemonDetail | null>(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
 
 	if (error) {
 		return (
@@ -123,7 +120,7 @@ export const PokemonDetails = () => {
 									<Grid item xs={12}>
 										{/*Pokemon Name*/}
 										<Typography variant='h4' gutterBottom align='center'>
-											{data?.name.toUpperCase()}
+											{data?.name?.toUpperCase()}
 										</Typography>
 									</Grid>
 									<Grid
@@ -158,7 +155,6 @@ export const PokemonDetails = () => {
 											>
 												{data?.abilities?.map((abilityObject, key) => (
 													<TypeInfo
-														classes={classes}
 														type={abilityObject.ability.name}
 														key={key}
 													/>
@@ -176,7 +172,6 @@ export const PokemonDetails = () => {
 											>
 												{data?.types?.map((typeObject, key) => (
 													<TypeInfo
-														classes={classes}
 														type={typeObject.type.name}
 														key={key}
 													/>
@@ -193,25 +188,21 @@ export const PokemonDetails = () => {
 												className={classes.typeContainer}
 											>
 												<TypeInfo
-													classes={classes}
-													type={`Weight ${data.weight}`}
+													type={`Weight ${data?.weight}`}
 												/>
 												<TypeInfo
-													classes={classes}
-													type={`Height ${data.height}`}
+													type={`Height ${data?.height}`}
 												/>
 												<TypeInfo
-													classes={classes}
-													type={`Experience ${data.base_experience}`}
+													type={`Experience ${data?.base_experience}`}
 												/>
 												{data?.stats?.map((statObject, key) => {
-													let stat =
+													const stat =
 														statObject?.stat?.name +
 														' : ' +
 														statObject?.base_stat;
 													return (
 														<TypeInfo
-															classes={classes}
 															type={stat}
 															key={key}
 														/>

@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import {
-	CircularProgress,
-	Container,
-	Grid,
-	IconButton,
-	List,
-	makeStyles,
-	TextField,
-} from '@material-ui/core';
+import { CircularProgress, Container, Grid, IconButton, List, makeStyles, TextField } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import AppsIcon from '@material-ui/icons/Apps';
 import ListIcon from '@material-ui/icons/List';
@@ -18,6 +10,8 @@ import PokemonListCard from './PokemonCard';
 import useFetch from '../../hooks/useFetch';
 import { PokemonViewMode } from '../../Utils/Enum';
 import { PokemonHeader } from '../../common/Header';
+import { LOCAL_STORAGE_VIEW_MODE } from '../../Utils/constants';
+import { IPokemon, IPokemonList } from '../../types';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -45,19 +39,19 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const PokemonList = () => {
+export const PokemonList : React.FC<unknown> = () => {
 	const classes = useStyles();
 
-	const { data, isLoading, error } = useFetch('https://pokeapi.co/api/v2/pokemon?limit=500');
-	const [pokemonList, setPokemonList] = useState([]);
-	const [searchText, setSearchText] = useState('');
-	const [viewMode, setViewMode] = useState(
-		() => parseInt(sessionStorage.getItem('---viewModePokemon---')) || PokemonViewMode.List,
+	const { data, isLoading, error } = useFetch<IPokemonList | null>('https://pokeapi.co/api/v2/pokemon?limit=500');
+	const [pokemonList, setPokemonList] = useState<IPokemon[]>([]);
+	const [searchText, setSearchText] = useState<string>('');
+	const [viewMode, setViewMode] = useState<number>(
+		() => parseInt(sessionStorage.getItem(LOCAL_STORAGE_VIEW_MODE) || `${PokemonViewMode.List}`),
 	);
 
 	useEffect(() => {
 		if (searchText.length) {
-			let filteredPokemonList = data?.results.filter((pokemon) =>
+			const filteredPokemonList = data?.results.filter((pokemon) =>
 				pokemon.name.toLowerCase().includes(searchText.toLowerCase()),
 			);
 			setPokemonList(filteredPokemonList || []);
@@ -66,8 +60,8 @@ export const PokemonList = () => {
 		}
 	}, [searchText, data]);
 
-	const handleViewModeChange = (viewMode) => {
-		sessionStorage.setItem('---viewModePokemon---', viewMode);
+	const handleViewModeChange = (viewMode : number) => {
+		sessionStorage.setItem(LOCAL_STORAGE_VIEW_MODE, String(viewMode));
 		setViewMode(viewMode);
 	};
 
@@ -83,7 +77,6 @@ export const PokemonList = () => {
 
 	return (
 		<>
-			{' '}
 			<PokemonHeader />
 			<Container maxWidth='lg'>
 				<Grid container spacing={4} className={classes.root}>

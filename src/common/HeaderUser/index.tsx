@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const HeaderUser = () => {
+export const HeaderUser: React.FC<any> = () => {
 	const classes = useStyles();
 	const history = useHistory();
 
