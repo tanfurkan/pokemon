@@ -13,7 +13,7 @@ test('renders user component in header without user', () => {
 		</AuthProvider>
 	);
 	const signOutText = screen.queryByText(/Sign Out/i);
-	expect(signOutText).toBeNull();
+	expect(signOutText).not.toBeInTheDocument();
 });
 
 test('renders user component in header with user', () => {
