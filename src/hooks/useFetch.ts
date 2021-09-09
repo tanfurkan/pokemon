@@ -1,13 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { IUseFetch } from '../types';
 
-interface State<T> {
-	isLoading?: boolean
-	data?: T
-	error?: string
-}
-
-function useFetch<T = unknown>(url: string): State<T> {
+function useFetch<T = unknown>(url: string): IUseFetch<T> {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [data, setData] = useState<T| undefined>(undefined);
 	const [error, setError] = useState<string>('');

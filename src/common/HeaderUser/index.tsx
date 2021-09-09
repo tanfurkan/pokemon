@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import { AuthContext } from '../../Auth/AuthContext';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
 	userBox: {
 		width: 100,
 		display: 'flex',
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const HeaderUser: React.FC<any> = () => {
+export const HeaderUser: React.FC<unknown> = () => {
 	const classes = useStyles();
 	const history = useHistory();
 

@@ -68,7 +68,7 @@ const validationSchema = yup.object({
 		.required('Password is required'),
 });
 
-export const LoginPage : React.FC<any> = () => {
+export const LoginPage : React.FC<unknown> = () => {
 	const classes = useStyles();
 	const history = useHistory();
 

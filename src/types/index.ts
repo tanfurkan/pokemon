@@ -11,10 +11,10 @@ export type AuthContextType = {
 }
 
 
-export interface IFetchData  {
-	isLoading: boolean
-	data?: IPokemonDetail | IPokemonList | null
-	error?: string|null
+export interface IUseFetch<T> {
+	isLoading?: boolean
+	data?: T
+	error?: string
 }
 
 
