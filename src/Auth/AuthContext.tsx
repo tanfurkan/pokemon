@@ -1,6 +1,7 @@
 import React, { memo, useState } from 'react';
-import { LOCAL_STORAGE_USER } from '../Utils/constants';
+
 import { AuthContextType, AuthUser } from '../types';
+import { LOCAL_STORAGE_USER } from '../Utils/constants';
 
 const authContextDefaultValues: AuthContextType = {
 	authenticatedUser: null,
@@ -13,8 +14,8 @@ const authContextDefaultValues: AuthContextType = {
 export const AuthContext = React.createContext<AuthContextType>(authContextDefaultValues);
 
 const AuthProvider: React.FC<React.ReactNode>  = ({ children }) => {
-	const [authenticatedUser, setAuthenticatedUser] = useState<AuthUser | null>(() =>
-		JSON.parse(localStorage.getItem(LOCAL_STORAGE_USER) || ''),
+	const [authenticatedUser, setAuthenticatedUser] = useState<AuthUser | null>(
+		JSON.parse(localStorage.getItem(LOCAL_STORAGE_USER) as string)
 	);
 
 	const setAuthUser = (user: AuthUser) => {

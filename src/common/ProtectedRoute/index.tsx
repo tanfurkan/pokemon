@@ -3,7 +3,6 @@ import { Redirect, Route, RouteProps } from 'react-router-dom';
 
 import { AuthContext } from '../../Auth/AuthContext';
 
-
 const ProtectedRoute : React.FC<RouteProps>  =(props) => {
 	const { authenticatedUser } = useContext(AuthContext);
 

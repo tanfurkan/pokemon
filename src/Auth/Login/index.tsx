@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useFormik } from 'formik';
@@ -18,13 +18,14 @@ import {
 	Typography,
 } from '@material-ui/core';
 
-import { pokemonGIF_URL, pokemonIMG_URL } from '../../Utils/constants';
-import authAxios from '../../services/auth';
 import { AuthContext } from '../AuthContext';
+import authAxios from '../../services/auth';
+import { pokemonGIF_URL, pokemonIMG_URL } from '../../Utils/constants';
 
 
 const useStyles = makeStyles((theme) => ({
 	loginContainer: {
+		minHeight: 700,
 		height: 'calc(100vh - 62px)',
 		display: 'flex',
 		justifyContent: 'center',
@@ -72,8 +73,15 @@ export const LoginPage : React.FC<unknown> = () => {
 	const classes = useStyles();
 	const history = useHistory();
 
-	const { setAuthUser } = useContext(AuthContext);
-	const [loading, setLoading] = useState(false);
+	const { authenticatedUser, setAuthUser } = useContext(AuthContext);
+	const [loading, setLoading] = useState<boolean>(false);
+
+	useEffect(() => {
+		if(authenticatedUser){
+			history.push('/');
+		}
+	}, []);
+
 
 	const formik = useFormik({
 		initialValues: {

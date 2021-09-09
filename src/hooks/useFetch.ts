@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+
 import { IUseFetch } from '../types';
 
 function useFetch<T = unknown>(url: string): IUseFetch<T> {
