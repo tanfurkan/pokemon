@@ -7,7 +7,6 @@ import '../../services/index';
 import { AuthContext } from '../../Auth/AuthContext';
 
 
-
 const useStyles = makeStyles(() => ({
 	userBox: {
 		width: 100,
