@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
+
+import '../../services/index';
 import { AuthContext } from '../../Auth/AuthContext';
 
 
