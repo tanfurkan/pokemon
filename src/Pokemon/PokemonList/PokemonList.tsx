@@ -134,6 +134,7 @@ export const PokemonList : React.FC<unknown> = () => {
 
 							{viewMode === PokemonViewMode.List ? (
 								<Grid
+									id='pokemonListView'
 									container
 									item
 									xs={12}
@@ -147,6 +148,7 @@ export const PokemonList : React.FC<unknown> = () => {
 								</Grid>
 							) : (
 								<Grid
+									id='pokemonGridView'
 									container
 									spacing={2}
 									item
