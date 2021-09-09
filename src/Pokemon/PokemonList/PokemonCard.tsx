@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const PokemonListCard : React.FC<{pokemon : IPokemon}> = ({ pokemon = null }) => {
+const PokemonListCard : React.FC<{pokemon : IPokemon | null}> = ({ pokemon = null }) => {
 	const classes = useStyles();
 
 	if (!pokemon) {
