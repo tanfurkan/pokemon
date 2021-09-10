@@ -10,18 +10,21 @@ test('renders user component in header without user', () => {
 	render(
 		<AuthProvider>
 			<HeaderUser />
-		</AuthProvider>
+		</AuthProvider>,
 	);
 	const signOutText = screen.queryByText(/Sign Out/i);
 	expect(signOutText).not.toBeInTheDocument();
 });
 
 test('renders user component in header with user', () => {
-	localStorage.setItem(LOCAL_STORAGE_USER,JSON.stringify({ id: 1, name: 'John Smith', email:'test@startuphero.es' }));
+	localStorage.setItem(
+		LOCAL_STORAGE_USER,
+		JSON.stringify({ id: 1, name: 'John Smith', email: 'test@startuphero.es' }),
+	);
 	render(
 		<AuthProvider>
 			<HeaderUser />
-		</AuthProvider>
+		</AuthProvider>,
 	);
 	const signOutText = screen.getByText(/Sign Out/i);
 	localStorage.removeItem(LOCAL_STORAGE_USER);

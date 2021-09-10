@@ -1,46 +1,46 @@
 export interface IUseFetch<T> {
-	isLoading?: boolean
-	data?: T
-	error?: string
+	isLoading?: boolean;
+	data?: T;
+	error?: string;
 }
 
 export interface IPokemon {
-	name: string
+	name: string;
 }
 
 export type PokemonParamType = {
-	pokemonName: string
-}
+	pokemonName: string;
+};
 
 export interface IPokemonList {
-	results : IPokemon[]
+	results: IPokemon[];
 }
 
 export interface IPokemonDetail {
-	name: string
-	weight: string
-	height: string
-	base_experience: string
-	abilities: IPokemonAbility[]
-	types: IPokemonType[]
-	stats: IPokemonStat[]
+	name: string;
+	weight: string;
+	height: string;
+	base_experience: string;
+	abilities: IPokemonAbility[];
+	types: IPokemonType[];
+	stats: IPokemonStat[];
 }
 
 interface IPokemonAbility {
-	ability : {
-		name: string
-	}
+	ability: {
+		name: string;
+	};
 }
 
 interface IPokemonType {
-	type : {
-		name: string
-	}
+	type: {
+		name: string;
+	};
 }
 
 interface IPokemonStat {
-	base_stat : string
-	stat : {
-		name: string
-	}
+	base_stat: string;
+	stat: {
+		name: string;
+	};
 }

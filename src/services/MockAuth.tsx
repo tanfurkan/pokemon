@@ -1,4 +1,5 @@
 import MockAdapter from 'axios-mock-adapter';
+
 import authAxios from './auth';
 
 // This sets the mock adapter on the default instance

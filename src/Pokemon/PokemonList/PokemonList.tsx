@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
-import { CircularProgress, Container, Grid, IconButton, List, makeStyles, TextField } from '@material-ui/core';
+import {
+	CircularProgress,
+	Container,
+	Grid,
+	IconButton,
+	List,
+	makeStyles,
+	TextField,
+} from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import AppsIcon from '@material-ui/icons/Apps';
 import ListIcon from '@material-ui/icons/List';
@@ -39,14 +47,16 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const PokemonList : React.FC<unknown> = () => {
+export const PokemonList: React.FC<unknown> = () => {
 	const classes = useStyles();
 
-	const { data, isLoading, error } = useFetch<IPokemonList | null>('https://pokeapi.co/api/v2/pokemon?limit=500');
+	const { data, isLoading, error } = useFetch<IPokemonList | null>(
+		'https://pokeapi.co/api/v2/pokemon?limit=500',
+	);
 	const [pokemonList, setPokemonList] = useState<IPokemon[]>([]);
 	const [searchText, setSearchText] = useState<string>('');
-	const [viewMode, setViewMode] = useState<number>(
-		() => parseInt(sessionStorage.getItem(LOCAL_STORAGE_VIEW_MODE) || `${PokemonViewMode.List}`),
+	const [viewMode, setViewMode] = useState<number>(() =>
+		parseInt(sessionStorage.getItem(LOCAL_STORAGE_VIEW_MODE) || `${PokemonViewMode.List}`),
 	);
 
 	useEffect(() => {
@@ -60,7 +70,7 @@ export const PokemonList : React.FC<unknown> = () => {
 		}
 	}, [searchText, data]);
 
-	const handleViewModeChange = (viewMode : number) => {
+	const handleViewModeChange = (viewMode: number) => {
 		sessionStorage.setItem(LOCAL_STORAGE_VIEW_MODE, String(viewMode));
 		setViewMode(viewMode);
 	};

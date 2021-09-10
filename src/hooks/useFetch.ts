@@ -5,7 +5,7 @@ import { IUseFetch } from '../types';
 
 function useFetch<T = unknown>(url: string): IUseFetch<T> {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
-	const [data, setData] = useState<T| undefined>(undefined);
+	const [data, setData] = useState<T | undefined>(undefined);
 	const [error, setError] = useState<string>('');
 
 	useEffect(() => {

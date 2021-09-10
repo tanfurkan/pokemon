@@ -13,7 +13,10 @@ test('renders app page without user', () => {
 });
 
 test('renders app page with user', () => {
-	localStorage.setItem(LOCAL_STORAGE_USER,JSON.stringify({ id: 1, name: 'John Smith', email:'test@startuphero.es' }));
+	localStorage.setItem(
+		LOCAL_STORAGE_USER,
+		JSON.stringify({ id: 1, name: 'John Smith', email: 'test@startuphero.es' }),
+	);
 	render(<App />);
 	const searchPokemonText = screen.getByText(/Pokemon App/i);
 	localStorage.removeItem(LOCAL_STORAGE_USER);

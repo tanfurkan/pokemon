@@ -6,15 +6,15 @@ import { LOCAL_STORAGE_VIEW_MODE } from '../Utils/constants';
 import { PokemonViewMode } from '../Utils/Enum';
 
 test('renders pokemon list while loading', async () => {
-	render(<PokemonList/>);
+	render(<PokemonList />);
 
-	const circularProgress  = screen.getByRole('progressbar');
+	const circularProgress = screen.getByRole('progressbar');
 	expect(circularProgress).toBeInTheDocument();
 });
 
 test('renders pokemon list with ListView mode', async () => {
 	sessionStorage.setItem(LOCAL_STORAGE_VIEW_MODE, `${PokemonViewMode.List}`);
-	render(<PokemonList/>);
+	render(<PokemonList />);
 
 	await waitFor(() => {
 		const listContainer = document.getElementById('pokemonListView');
@@ -24,11 +24,10 @@ test('renders pokemon list with ListView mode', async () => {
 
 test('renders pokemon list with GridView mode', async () => {
 	sessionStorage.setItem(LOCAL_STORAGE_VIEW_MODE, `${PokemonViewMode.Grid}`);
-	render(<PokemonList/>);
+	render(<PokemonList />);
 
 	await waitFor(() => {
 		const listContainer = document.getElementById('pokemonGridView');
 		expect(listContainer).not.toBeNull();
 	});
 });
-

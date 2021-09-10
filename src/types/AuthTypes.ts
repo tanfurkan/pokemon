@@ -8,4 +8,4 @@ export type AuthContextType = {
 	authenticatedUser: AuthUser | null;
 	setAuthUser: (user: AuthUser) => void;
 	removeAuthUser: () => void;
-}
+};

@@ -1,7 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { CardMedia, CircularProgress, Container, Grid, makeStyles, Typography } from '@material-ui/core';
+import {
+	CardMedia,
+	CircularProgress,
+	Container,
+	Grid,
+	makeStyles,
+	Typography,
+} from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { grey } from '@material-ui/core/colors';
 
@@ -49,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const TypeInfo : React.FC<{ type: string}> = ( {type} ) => {
+const TypeInfo: React.FC<{ type: string }> = ({ type }) => {
 	const classes = useStyles();
 	let colorStyle = {};
 
@@ -82,12 +89,12 @@ const TypeInfo : React.FC<{ type: string}> = ( {type} ) => {
 	);
 };
 
-
-
 export const PokemonDetails: React.FC<unknown> = () => {
 	const classes = useStyles();
 	const { pokemonName } = useParams<PokemonParamType>();
-	const { data , isLoading, error } = useFetch<IPokemonDetail | null>(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+	const { data, isLoading, error } = useFetch<IPokemonDetail | null>(
+		`https://pokeapi.co/api/v2/pokemon/${pokemonName}`,
+	);
 
 	if (error) {
 		return (
@@ -187,12 +194,8 @@ export const PokemonDetails: React.FC<unknown> = () => {
 												justifyContent='flex-start'
 												className={classes.typeContainer}
 											>
-												<TypeInfo
-													type={`Weight ${data?.weight}`}
-												/>
-												<TypeInfo
-													type={`Height ${data?.height}`}
-												/>
+												<TypeInfo type={`Weight ${data?.weight}`} />
+												<TypeInfo type={`Height ${data?.height}`} />
 												<TypeInfo
 													type={`Experience ${data?.base_experience}`}
 												/>
@@ -201,12 +204,7 @@ export const PokemonDetails: React.FC<unknown> = () => {
 														statObject?.stat?.name +
 														' : ' +
 														statObject?.base_stat;
-													return (
-														<TypeInfo
-															type={stat}
-															key={key}
-														/>
-													);
+													return <TypeInfo type={stat} key={key} />;
 												})}
 											</Grid>
 										</Grid>

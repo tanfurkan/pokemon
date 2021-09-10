@@ -5,7 +5,7 @@ import { Avatar, ListItem, ListItemAvatar, ListItemText } from '@material-ui/cor
 import capitalizeFirstLetter from '../../Utils/capitalizeFirstLetter';
 import { IPokemon } from '../../types';
 
-const PokemonListRow : React.FC<{ pokemon: IPokemon | null }> = ({ pokemon = null })  =>  {
+const PokemonListRow: React.FC<{ pokemon: IPokemon | null }> = ({ pokemon = null }) => {
 	if (!pokemon) {
 		return null;
 	}

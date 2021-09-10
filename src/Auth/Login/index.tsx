@@ -22,7 +22,6 @@ import { AuthContext } from '../AuthContext';
 import authAxios from '../../services/auth';
 import { pokemonGIF_URL, pokemonIMG_URL } from '../../Utils/constants';
 
-
 const useStyles = makeStyles((theme) => ({
 	loginContainer: {
 		minHeight: 700,
@@ -59,17 +58,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const validationSchema = yup.object({
-	email: yup
-		.string()
-		.email('Enter a valid email')
-		.required('Email is required'),
+	email: yup.string().email('Enter a valid email').required('Email is required'),
 	password: yup
 		.string()
 		.min(8, 'Password should be of minimum 8 characters length')
 		.required('Password is required'),
 });
 
-export const LoginPage : React.FC<unknown> = () => {
+export const LoginPage: React.FC<unknown> = () => {
 	const classes = useStyles();
 	const history = useHistory();
 
@@ -77,11 +73,10 @@ export const LoginPage : React.FC<unknown> = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 
 	useEffect(() => {
-		if(authenticatedUser){
+		if (authenticatedUser) {
 			history.push('/');
 		}
 	}, []);
-
 
 	const formik = useFormik({
 		initialValues: {
@@ -102,7 +97,7 @@ export const LoginPage : React.FC<unknown> = () => {
 					setLoading(false);
 					history.push('/');
 				})
-				.catch((error : AxiosError) => {
+				.catch((error: AxiosError) => {
 					window.alert(error?.response?.data?.message);
 					setLoading(false);
 				});
@@ -174,7 +169,7 @@ export const LoginPage : React.FC<unknown> = () => {
 						</Grid>
 						<Grid item>
 							<Link href='#' variant='body2'>
-								{'Don\'t have an account? Sign Up'}
+								{"Don't have an account? Sign Up"}
 							</Link>
 						</Grid>
 					</Grid>
