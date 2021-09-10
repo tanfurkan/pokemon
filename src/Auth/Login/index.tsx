@@ -21,6 +21,7 @@ import {
 import { AuthContext } from '../AuthContext';
 import authAxios from '../../services/auth';
 import { pokemonGIF_URL, pokemonIMG_URL } from '../../Utils/constants';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
 	loginContainer: {
@@ -71,6 +72,7 @@ export const LoginPage: React.FC<unknown> = () => {
 
 	const { authenticatedUser, setAuthUser } = useContext(AuthContext);
 	const [loading, setLoading] = useState<boolean>(false);
+	const [error, setError] = useState('');
 
 	useEffect(() => {
 		if (authenticatedUser) {
@@ -98,7 +100,7 @@ export const LoginPage: React.FC<unknown> = () => {
 					history.push('/');
 				})
 				.catch((error: AxiosError) => {
-					window.alert(error?.response?.data?.message);
+					setError(error?.response?.data?.message || '');
 					setLoading(false);
 				});
 		},
@@ -151,6 +153,7 @@ export const LoginPage: React.FC<unknown> = () => {
 						control={<Checkbox value='remember' color='primary' />}
 						label='Remember me'
 					/>
+					{error ? <Alert severity='error'>{error}</Alert> : null}
 					<Button
 						type='submit'
 						color='primary'
