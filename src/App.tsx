@@ -1,12 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
-import { CssBaseline } from '@material-ui/core';
+import { Container, CssBaseline } from '@material-ui/core';
 
 import { LoginPage } from './Auth';
 import AuthProvider from './Auth/AuthContext';
 import { PokemonDetails, PokemonList } from './Pokemon';
 import ProtectedRoute from './common/ProtectedRoute';
+import { PokemonHeader } from './common/Header';
 
 const App: React.FC<unknown> = () => (
 	<AuthProvider>
@@ -17,8 +18,18 @@ const App: React.FC<unknown> = () => (
 					<Route exact path='/login'>
 						<LoginPage />
 					</Route>
-					<ProtectedRoute exact path='/' component={PokemonList} />
-					<ProtectedRoute path='/pokemon/:pokemonName' component={PokemonDetails} />
+					<Switch>
+						<>
+							<PokemonHeader />
+							<Container maxWidth='lg'>
+								<ProtectedRoute exact path='/' component={PokemonList} />
+								<ProtectedRoute
+									path='/pokemon/:pokemonName'
+									component={PokemonDetails}
+								/>
+							</Container>
+						</>
+					</Switch>
 					<Route>
 						<div>
 							404

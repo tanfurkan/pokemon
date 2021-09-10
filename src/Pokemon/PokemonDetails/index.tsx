@@ -1,20 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import {
-	CardMedia,
-	CircularProgress,
-	Container,
-	Grid,
-	makeStyles,
-	Typography,
-} from '@material-ui/core';
+import { CardMedia, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { grey } from '@material-ui/core/colors';
 
 import useFetch from '../../hooks/useFetch';
 import capitalizeFirstLetter from '../../Utils/capitalizeFirstLetter';
-import { PokemonHeader } from '../../common/Header';
 import { IPokemonDetail, PokemonParamType } from '../../types';
 
 const useStyles = makeStyles((theme) => ({
@@ -108,113 +100,110 @@ export const PokemonDetails: React.FC<unknown> = () => {
 
 	return (
 		<>
-			<PokemonHeader />
-			<Container maxWidth='lg'>
-				<div>
-					<Grid container spacing={4} className={classes.root}>
-						{isLoading ? (
-							<CircularProgress />
-						) : (
-							<>
+			<div>
+				<Grid container spacing={4} className={classes.root}>
+					{isLoading ? (
+						<CircularProgress />
+					) : (
+						<>
+							<Grid
+								container
+								item
+								xs={12}
+								spacing={4}
+								justifyContent={'space-between'}
+								alignItems={'center'}
+							>
+								<Grid item xs={12}>
+									{/*Pokemon Name*/}
+									<Typography variant='h4' gutterBottom align='center'>
+										{data?.name?.toUpperCase()}
+									</Typography>
+								</Grid>
 								<Grid
 									container
 									item
 									xs={12}
+									justifyContent='center'
 									spacing={4}
-									justifyContent={'space-between'}
-									alignItems={'center'}
 								>
-									<Grid item xs={12}>
-										{/*Pokemon Name*/}
-										<Typography variant='h4' gutterBottom align='center'>
-											{data?.name?.toUpperCase()}
-										</Typography>
+									{/*Pokemon Info*/}
+									<Grid item xs={12} md={6}>
+										{/*Pokemon Image*/}
+										<CardMedia
+											component={'img'}
+											className={classes.cardImage}
+											alt={data?.name}
+											image={`https://img.pokemondb.net/artwork/large/${data?.name}.jpg`}
+											title={data?.name}
+										/>
 									</Grid>
-									<Grid
-										container
-										item
-										xs={12}
-										justifyContent='center'
-										spacing={4}
-									>
-										{/*Pokemon Info*/}
-										<Grid item xs={12} md={6}>
-											{/*Pokemon Image*/}
-											<CardMedia
-												component={'img'}
-												className={classes.cardImage}
-												alt={data?.name}
-												image={`https://img.pokemondb.net/artwork/large/${data?.name}.jpg`}
-												title={data?.name}
-											/>
+									<Grid item xs={12} md={6}>
+										{/*Pokemon Details*/}
+										<Grid item xs={12}>
+											<Typography variant='h5'>Abilities</Typography>
 										</Grid>
-										<Grid item xs={12} md={6}>
-											{/*Pokemon Details*/}
-											<Grid item xs={12}>
-												<Typography variant='h5'>Abilities</Typography>
-											</Grid>
-											<Grid
-												container
-												item
-												xs={12}
-												justifyContent='flex-start'
-												className={classes.typeContainer}
-											>
-												{data?.abilities?.map((abilityObject, key) => (
-													<TypeInfo
-														type={abilityObject.ability.name}
-														key={key}
-													/>
-												))}
-											</Grid>
-											<Grid item xs={12} className={classes.detailTitle}>
-												<Typography variant='h5'>Types</Typography>
-											</Grid>
-											<Grid
-												container
-												item
-												xs={12}
-												justifyContent='flex-start'
-												className={classes.typeContainer}
-											>
-												{data?.types?.map((typeObject, key) => (
-													<TypeInfo
-														type={typeObject.type.name}
-														key={key}
-													/>
-												))}
-											</Grid>
-											<Grid item xs={12} className={classes.detailTitle}>
-												<Typography variant='h5'>Stats</Typography>
-											</Grid>
-											<Grid
-												container
-												item
-												xs={12}
-												justifyContent='flex-start'
-												className={classes.typeContainer}
-											>
-												<TypeInfo type={`Weight ${data?.weight}`} />
-												<TypeInfo type={`Height ${data?.height}`} />
+										<Grid
+											container
+											item
+											xs={12}
+											justifyContent='flex-start'
+											className={classes.typeContainer}
+										>
+											{data?.abilities?.map((abilityObject, key) => (
 												<TypeInfo
-													type={`Experience ${data?.base_experience}`}
+													type={abilityObject.ability.name}
+													key={key}
 												/>
-												{data?.stats?.map((statObject, key) => {
-													const stat =
+											))}
+										</Grid>
+										<Grid item xs={12} className={classes.detailTitle}>
+											<Typography variant='h5'>Types</Typography>
+										</Grid>
+										<Grid
+											container
+											item
+											xs={12}
+											justifyContent='flex-start'
+											className={classes.typeContainer}
+										>
+											{data?.types?.map((typeObject, key) => (
+												<TypeInfo
+													type={typeObject.type.name}
+													key={key}
+												/>
+											))}
+										</Grid>
+										<Grid item xs={12} className={classes.detailTitle}>
+											<Typography variant='h5'>Stats</Typography>
+										</Grid>
+										<Grid
+											container
+											item
+											xs={12}
+											justifyContent='flex-start'
+											className={classes.typeContainer}
+										>
+											<TypeInfo type={`Weight ${data?.weight}`} />
+											<TypeInfo type={`Height ${data?.height}`} />
+											<TypeInfo
+												type={`Experience ${data?.base_experience}`}
+											/>
+											{data?.stats?.map((statObject, key) => {
+												const stat =
 														statObject?.stat?.name +
 														' : ' +
 														statObject?.base_stat;
-													return <TypeInfo type={stat} key={key} />;
-												})}
-											</Grid>
+												return <TypeInfo type={stat} key={key} />;
+											})}
 										</Grid>
 									</Grid>
 								</Grid>
-							</>
-						)}
-					</Grid>
-				</div>
-			</Container>
+							</Grid>
+						</>
+					)}
+				</Grid>
+			</div>
 		</>
 	);
 };
