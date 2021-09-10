@@ -10,17 +10,29 @@ function useFetch<T = unknown>(url: string): IUseFetch<T> {
 
 	useEffect(() => {
 		setIsLoading(true);
+		const source = axios.CancelToken.source();
+		let canceled = false;
 		axios
-			.get(url)
+			.get(url, {
+				cancelToken: source.token,
+			})
 			.then((response) => {
 				//  results, count, next, previous can be used from response
-				setData(response?.data);
-				setIsLoading(false);
+				if (!canceled) {
+					setData(response?.data);
+					setIsLoading(false);
+				}
 			})
 			.catch((error) => {
-				setError(`Error during fetch! - ${error?.response?.data || ''}`);
-				setIsLoading(false);
+				if (!canceled) {
+					setError(`Error during fetch! - ${error?.response?.data || ''}`);
+					setIsLoading(false);
+				}
 			});
+		return () => {
+			canceled = true;
+			source.cancel();
+		};
 	}, [url]);
 
 	return { isLoading, data, error };
