@@ -8,6 +8,8 @@ import { grey } from '@material-ui/core/colors';
 import useFetch from '../../hooks/useFetch';
 import capitalizeFirstLetter from '../../Utils/capitalizeFirstLetter';
 import { IPokemonDetail, PokemonParamType } from '../../types';
+import { TypeBackgroundColor } from '../../Utils/Enum';
+import { getRandomRGBString } from '../../Utils/getRandomRGBString';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -50,29 +52,8 @@ const useStyles = makeStyles((theme) => ({
 
 const TypeInfo: React.FC<{ type: string }> = ({ type }) => {
 	const classes = useStyles();
-	let colorStyle = {};
-
-	switch (type) {
-		case 'fire':
-			colorStyle = { background: 'red' };
-			break;
-		case 'flying':
-			colorStyle = { background: 'aqua' };
-			break;
-		case 'grass':
-			colorStyle = { background: 'green' };
-			break;
-		case 'poison':
-			colorStyle = { background: 'purple' };
-			break;
-		default: {
-			const randomRColor = Math.floor(Math.random() * 255);
-			const randomGColor = Math.floor(Math.random() * 255);
-			const randomBColor = Math.floor(Math.random() * 255);
-			colorStyle = { background: `rgb(${randomRColor},${randomGColor},${randomBColor}` };
-			break;
-		}
-	}
+	const color = TypeBackgroundColor[type] || getRandomRGBString();
+	const colorStyle = {background: color};
 
 	return (
 		<div className={classes.typeInfo} style={colorStyle}>
