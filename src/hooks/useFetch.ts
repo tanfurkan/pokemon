@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { IUseFetch } from '../types';
 
-function useFetch<T = unknown>(url: string): IUseFetch<T> {
+const useFetch = <T = unknown>(url: string): IUseFetch<T> => {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [data, setData] = useState<T | undefined>(undefined);
 	const [error, setError] = useState<string>('');
@@ -36,6 +36,6 @@ function useFetch<T = unknown>(url: string): IUseFetch<T> {
 	}, [url]);
 
 	return { isLoading, data, error };
-}
+};
 
 export default useFetch;
